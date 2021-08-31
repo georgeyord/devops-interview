@@ -1,0 +1,38 @@
+suite: test default values in configmap
+templates:
+  - configmap.yaml
+tests:
+  - it: should work
+    asserts:
+      # - matchSnapshot: {}
+      - isKind:
+          of: ConfigMap
+      - isEmpty:
+          path: data.foobar\.conf
+      - equal:
+          path: data.startup-args\.conf
+          value: |
+            --releaseRELEASE-NAME--chart2.3.4--version2.3.4
+      - equal:
+          path: data.startup1\.conf
+          value: release=RELEASE-NAME chart=2.3.4 version=2.3.4
+      - equal:
+          path: data.startup2\.conf
+          value: |2
+
+            release=RELEASE-NAME
+            chart=2.3.4
+            version=2.3.4
+      - equal:
+          path: data.startup3\.conf
+          value: |
+            release=RELEASE-NAME
+            chart=2.3.4
+            version=2.3.4
+      - equal:
+          path: data.startup4\.conf
+          value: |2-
+
+            release=RELEASE-NAME
+            chart=2.3.4
+            version=2.3.4

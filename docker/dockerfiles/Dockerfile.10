@@ -1,0 +1,13 @@
+FROM alpine:latest AS downloader
+ARG BUILD_INFO
+
+RUN apt-get install ca-certificates openssl wget
+
+COPY https://example.com/files.tar .
+RUN mv files/images/* .
+RUN rm -rf files
+RUN echo "${BUILD_INFO}" > build.info
+
+FROM caddy:2-alpine
+
+COPY --from=downloader /www /usr/share/caddy/

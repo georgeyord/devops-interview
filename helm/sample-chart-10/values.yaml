@@ -1,0 +1,5 @@
+image:
+  repository: example/foobar
+  pullPolicy: IfNotPresent
+
+dbPassword: foobar
