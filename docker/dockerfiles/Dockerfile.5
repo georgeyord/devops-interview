@@ -2,6 +2,9 @@ FROM caddy:2-alpine
 
 RUN apt-get install ca-certificates openssl wget
 
+# Working directory is missing
+WORKDIR /usr/share/caddy/
+
 ADD files.tar .
 RUN mv files/images/* .
 RUN rm -rf files
