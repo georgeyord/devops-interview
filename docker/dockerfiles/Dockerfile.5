@@ -1,5 +1,7 @@
 FROM caddy:2-alpine
 
+# Should run update before
+# Wrong package manager
 RUN apt-get install ca-certificates openssl wget
 
 ADD files.tar .
